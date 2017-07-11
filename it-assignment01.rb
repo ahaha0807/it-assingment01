@@ -28,13 +28,28 @@ def ask_finish
     end
 end
 
+def ask_what_to_buy
+    selected = '払い戻し'
+    puts selected.to_s + 'と入力しました'
+    return false
+end
+
 total = 0
 isRepeat = true
 
+# お金の投入処理
 while isRepeat do
     input = accept_money()
-    isRepeat = ask_finish()
     total += input
+    
+    puts '合計' + total.to_s + '円投入されています。'
+    isRepeat = ask_finish()
 end
 
-puts '合計' + total.to_s + '円投入されています。'
+# 購入処理
+item = ask_what_to_buy()
+unless item
+    puts '払い戻し操作が実行されました。'
+    puts 'お釣りは、' + total.to_s + '円です。' 
+    total -= total
+end
