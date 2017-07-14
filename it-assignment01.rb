@@ -3,7 +3,14 @@ def to_harf_number(input)
 end
 
 def accept_money
-    puts 'お金を投入してください'
+    output_description = "【お金を投入してください。】\n"
+    output_description <<  "投入できる種類は\n"
+    output_description << "- 10円\n- 50円\n- 100円\n- 500円\n- 1000円\n"
+    output_description << "の5種類のみです。"
+    output_description.freeze
+
+    puts output_description
+    
     input_money = gets.chomp!
     input_money = to_harf_number(input_money)
     while input_money.zero? do
