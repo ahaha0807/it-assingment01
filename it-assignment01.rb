@@ -15,16 +15,21 @@ class Checker
     
     def self.check(input)
         input = to_harf_number(input)
-        input = 0 unless check_possible_money(input) 
+        isPossibleAccept = check_possible_money(input)
 
-        while input.zero? do
+        until isPossibleAccept do
+            puts "受け付けることが出来ないお金が投入されました。"
+            puts "釣り銭として排出します。"
+
+            puts input
+
             puts '以下の' + @@Possible_money_type.size.to_s + '種類の中から選択してください'
             @@Possible_money_type.each {|item| puts "- " + item.to_s + "円\n"}
            
             input = gets.chomp!
-            
+
             input = to_harf_number(input)
-            input = 0 unless check_possible_money(input) 
+            isPossibleAccept = check_possible_money(input) 
         end
         return input
     end
