@@ -1,22 +1,31 @@
+Possible_money_type = [10, 50, 100, 500, 1000]
+
 def to_harf_number(input)
     input.tr('０-９', '0-9').to_i
 end
 
-def accept_money
-    output_description = "【お金を投入してください。】\n"
-    output_description <<  "投入できる種類は\n"
-    output_description << "- 10円\n- 50円\n- 100円\n- 500円\n- 1000円\n"
-    output_description << "の5種類のみです。"
-    output_description.freeze
+def check_possible_money(input)
+    return Possible_money_type.any? {|item| item == input}
+end
 
-    puts output_description
+def accept_money
+    output_guide = "【お金を投入してください。】\n"
+    output_guide <<  "投入できる種類は以下の" + Possible_money_type.size.to_s + "種類のみです\n"
+    Possible_money_type.each {|item| output_guide << "- " + item.to_s + "円\n" }
+    output_guide.freeze
+
+    puts output_guide
     
     input_money = gets.chomp!
     input_money = to_harf_number(input_money)
+    input_money = 0 unless check_possible_money(input_money) 
+
     while input_money.zero? do
-        puts '1以上の整数値を入力してください'
+        puts '以下の' + Possible_money_type.size.to_s + '種類の中から選択してください'
+        Possible_money_type.each {|item| puts "- " + item.to_s + "円\n"}
         input_money = gets.chomp!
         input_money = to_harf_number(input_money)
+        input_money = 0 unless check_possible_money(input_money) 
     end
 
     puts input_money.to_s + '円投入されました'
