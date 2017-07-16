@@ -28,7 +28,7 @@ class Checker
            
             input = gets.chomp!
 
-            if input == "管理者"
+            if input == "管理者" || input == "admin"
                 Stocker.display_lanes()
                 input = 0
             else
@@ -82,7 +82,7 @@ def accept_money
     
     input_money = gets.chomp!
 
-    if input_money == "管理者"
+    if input == "管理者" || input == "admin"
         Stocker.display_lanes()
         input_money = 0
     else
