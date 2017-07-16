@@ -28,10 +28,46 @@ class Checker
            
             input = gets.chomp!
 
-            input = to_harf_number(input)
-            isPossibleAccept = check_possible_money(input) 
+            if input == "管理者"
+                Stocker.display_lanes()
+                input = 0
+            else
+                input = Checker.check(input)
+            end
+
         end
         return input
+    end
+end
+
+
+class Stocker
+    @@Lanes = Array.new()
+
+    def set_drink_lane(name, price, initial_stock)
+        @@Lanes.push(Drink.new(name, price, initial_stock))
+    end
+
+    def self.display_lanes
+        @@Lanes.each.with_index {|item, index|
+            puts 'Lane-' + index.to_s
+            puts item.get_data()
+        }
+    end
+end
+
+
+class Drink
+    def initialize(name, price, initial_stock)
+        @name = name
+        @price = price
+        @stock = initial_stock
+    end
+
+    def get_data
+        puts @name
+        puts @price
+        puts @stock
     end
 end
 
@@ -46,7 +82,12 @@ def accept_money
     
     input_money = gets.chomp!
 
-    input_money = Checker.check(input_money)
+    if input_money == "管理者"
+        Stocker.display_lanes()
+        input_money = 0
+    else
+        input_money = Checker.check(input_money)
+    end
 
     puts input_money.to_s + '円投入されました'
     return input_money
@@ -72,6 +113,10 @@ end
 
 total = 0
 isRepeat = true
+
+# 自販機の初期化
+stocker = Stocker.new
+stocker.set_drink_lane("コーラ", 120, 5)
 
 # お金の投入処理
 while isRepeat do
