@@ -33,8 +33,8 @@ class Checker
                 input = 0
             else
                 input = Checker.check(input)
+                isPossibleAccept = check_possible_money(input)
             end
-
         end
         return input
     end
@@ -82,7 +82,7 @@ def accept_money
     
     input_money = gets.chomp!
 
-    if input == "管理者" || input == "admin"
+    if input_money == "管理者" || input_money == "admin"
         Stocker.display_lanes()
         input_money = 0
     else
