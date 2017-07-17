@@ -9,8 +9,13 @@ def ask_what_to_buy
     return false
 end
 
+def admin_mode
+    Stocker.display_lanes()
+end
+
 total = 0
 isRepeat = true
+isAdmin = false
 
 # 自販機の初期化
 stocker = Stocker.new
@@ -19,7 +24,12 @@ stocker.set_drink_lane("コーラ", 120, 5)
 # お金の投入処理
 deposit = Deposit.new()
 while isRepeat do
-    deposit.accept_money()
+    isAdmin = deposit.accept_money()
+    
+    if isAdmin
+        admin_mode() 
+        break
+    end
 
     puts '合計' + deposit.get_total.to_s + '円投入されています。'
     isRepeat = Deposit.ask_finish()

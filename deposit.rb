@@ -4,7 +4,7 @@ class Deposit
         @total = 0
     end
 
-    def get_money
+    def get_last_inputted_money
         @last_inputted_money
     end
 
@@ -27,18 +27,22 @@ class Deposit
         end
 
         if contents == "管理者" || contents == "admin"
-            Stocker.display_lanes()
             @last_inputted_money = 0
+            return true
         else
             @last_inputted_money = MoneyChecker.check(contents)
             @total += @last_inputted_money
             puts @last_inputted_money.to_s + '円投入されました'
+            return false
         end
     end
 
-    def self.ask_finish
+    def self.ask_finish(answer = '')
         puts 'お金をまだ入れますか？ (はい/いいえ)'
-        answer = gets.chomp!.to_s
+        if answer == ''
+            answer = gets.chomp!.to_s 
+        end
+
         if answer == 'はい' || answer.downcase == 'yes' || answer.downcase == 'y'
             return true
         elsif answer == 'いいえ' || answer.downcase == 'no' || answer.downcase == 'n'
