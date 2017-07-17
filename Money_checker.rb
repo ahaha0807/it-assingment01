@@ -1,4 +1,4 @@
-require './deposit.rb'
+require './Deposit.rb'
 
 class MoneyChecker 
     @@Possible_money_type = [10, 50, 100, 500, 1000]

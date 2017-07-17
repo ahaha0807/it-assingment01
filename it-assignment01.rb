@@ -1,7 +1,7 @@
-require './money_checker.rb'
-require './stocker.rb'
-require './drink.rb'
-require './deposit.rb'
+require './Money_checker.rb'
+require './Stocker.rb'
+require './Drink.rb'
+require './Deposit.rb'
 
 def ask_what_to_buy
     selected = '払い戻し'

@@ -1,7 +1,7 @@
 require 'test/unit'
-require './deposit.rb'
-require './money_checker.rb'
-require './stocker.rb'
+require './Deposit.rb'
+require './Money_checker.rb'
+require './Stocker.rb'
 
 class DepositTest < Test::Unit::TestCase
     def setup
