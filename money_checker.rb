@@ -1,3 +1,5 @@
+require './deposit.rb'
+
 class MoneyChecker 
     @@Possible_money_type = [10, 50, 100, 500, 1000]
     def self.get_possible_money_type
@@ -5,6 +7,7 @@ class MoneyChecker
     end
 
     def self.to_harf_number(input)
+        input = input.to_s
         input.tr('０-９', '0-9').to_i
     end
 

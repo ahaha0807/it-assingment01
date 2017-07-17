@@ -1,7 +1,13 @@
 require './money_checker.rb'
 require './stocker.rb'
 require './drink.rb'
-require './Ask.rb'
+require './deposit.rb'
+
+def ask_what_to_buy
+    selected = '払い戻し'
+    puts selected.to_s + 'と入力しました'    
+    return false
+end
 
 total = 0
 isRepeat = true
@@ -11,18 +17,18 @@ stocker = Stocker.new
 stocker.set_drink_lane("コーラ", 120, 5)
 
 # お金の投入処理
+deposit = Deposit.new()
 while isRepeat do
-    input = Ask.accept_money()
-    total += input
-    
-    puts '合計' + total.to_s + '円投入されています。'
-    isRepeat = Ask.ask_finish()
+    deposit.accept_money()
+
+    puts '合計' + deposit.get_total.to_s + '円投入されています。'
+    isRepeat = Deposit.ask_finish()
 end
 
 # 購入処理
-item = Ask.ask_what_to_buy()
+item = ask_what_to_buy()
 unless item
     puts '払い戻し操作が実行されました。'
-    puts 'お釣りは、' + total.to_s + '円です。' 
+    puts 'お釣りは、' + deposit.get_total.to_s + '円です。' 
     total -= total
 end
