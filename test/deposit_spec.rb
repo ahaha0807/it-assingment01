@@ -36,11 +36,11 @@ class DepositTest < Test::Unit::TestCase
     # その他を呼び出すと再起呼び出しされるので無し。
     # TODO: いずれこれをテストできるように本番コードを修正する
     def test_肯定形で入力した時にtrueが返るか
-        assert_equal(true, Deposit.ask_finish('はい'))
-        assert_equal(true, Deposit.ask_finish('YES'))
-        assert_equal(true, Deposit.ask_finish('yes'))
-        assert_equal(true, Deposit.ask_finish('Y'))
-        assert_equal(true, Deposit.ask_finish('y'))
+        assert(Deposit.ask_finish('はい'))
+        assert(Deposit.ask_finish('YES'))
+        assert(Deposit.ask_finish('yes'))
+        assert(Deposit.ask_finish('Y'))
+        assert(Deposit.ask_finish('y'))
     end 
 
     def test_否定形で入力した時にfalseが返るか
