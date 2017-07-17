@@ -10,6 +10,3 @@ PLATFORMS
 
 DEPENDENCIES
   test-unit (= 3.2.5)
-
-BUNDLED WITH
-   1.15.1
