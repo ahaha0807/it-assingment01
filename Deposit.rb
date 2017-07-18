@@ -24,6 +24,12 @@ class Deposit
         self.set_total(self.get_total - unit_price)
     end
 
+    def return_charge(charge)
+        puts 'お釣りは、' + charge.to_s + '円です。'
+        self.set_total(0)
+        self.set_last_inputted_money(0)
+    end
+
     def accept_money(_contents = 0)
         possible_money_type = MoneyChecker.get_possible_money_type()
 
@@ -46,20 +52,6 @@ class Deposit
             @total += @last_inputted_money
             puts @last_inputted_money.to_s + '円投入されました'
             return false
-        end
-    end
-
-    def self.ask_finish(answer = '')
-        if answer == ''
-            answer = gets.chomp!.to_s 
-        end
-
-        if answer == 'はい' || answer.downcase == 'yes' || answer.downcase == 'y'
-            return true
-        elsif answer == 'いいえ' || answer.downcase == 'no' || answer.downcase == 'n'
-            return false
-        else
-            ask_finish()
         end
     end
 end

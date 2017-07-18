@@ -3,19 +3,34 @@ require './Stocker.rb'
 require './Drink.rb'
 require './Deposit.rb'
 
-def ask_what_to_buy(selected = '')
+def ask_what_to_buy(depositted_price, selected = '')
     if selected == ''
         puts '何を購入しますか？'
+        puts '預り金 : ' + depositted_price.to_s + '円'
         Stocker.display_commodities()
 
         selected = gets.chomp!
     end
 
-    if selected == '払い戻し' || selected == '払い出し' || selected == 'return'
+    if selected == '払い戻し' || selected == '払い出し' || selected == 'return' || selected == '取り消し'
         return 'return'
+    else
+        return selected
+    end
+end
+
+def ask_finish(answer = '')
+    if answer == ''
+        answer = gets.chomp!.to_s 
     end
 
-    return selected
+    if answer == 'はい' || answer.downcase == 'yes' || answer.downcase == 'y'
+        return true
+    elsif answer == 'いいえ' || answer.downcase == 'no' || answer.downcase == 'n'
+        return false
+    else
+        ask_finish()
+    end
 end
 
 def check_selected_item(item, deposit)
@@ -61,39 +76,33 @@ until isEnd
 
         puts '合計' + deposit.get_total.to_s + '円投入されています。'
         puts 'お金をまだ入れますか？ (はい/いいえ)'
-        isRepeat = Deposit.ask_finish()
+        isRepeat = ask_finish()
     end
 
     # 購入処理
-    item = ask_what_to_buy()
+    item = ask_what_to_buy(deposit.get_total)
+    item = stocker.find(item)
 
     if item == 'return'
         puts '払い戻し操作が実行されました。'
-        deposit.calclate_charge(0)
-        puts 'お釣りは、' + deposit.get_total.to_s + '円です。' 
-        deposit.set_total(0)
-    end
-
-    item = stocker.find(item)
-
-    if check_selected_item(item, deposit)
+        
+        charge = deposit.calclate_charge(0)
+        deposit.return_charge(charge)
+    elsif check_selected_item(item, deposit)
         stocker.buy_selected_item(item)
         charge = deposit.calclate_charge(item.get_price)
         puts 'お釣りは、' + charge.to_s + '円です。'
         
         deposit.set_total(0)
         deposit.set_last_inputted_money(0)
-        # Stocker.display_lanes()
     else
         # 何もしない
         puts "選択した飲み物は購入できません。\n払い戻しします。"
 
         charge = deposit.calclate_charge(0)
-        puts 'お釣りは、' + charge.to_s + '円です。'
-        deposit.set_total(0)
-        deposit.set_last_inputted_money(0)
+        deposit.return_charge(charge)
     end
 
     puts '終了しますか？'
-    isEnd = Deposit.ask_finish()
+    isEnd = ask_finish()
 end

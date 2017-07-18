@@ -5,7 +5,7 @@ class Drink
         @stock = initial_stock
     end
 
-    def get_data
+    def print_data
         puts @name
         puts @price
         puts @stock
