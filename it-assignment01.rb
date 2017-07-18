@@ -98,7 +98,7 @@ until isEnd
         deposit.set_total(0)
         deposit.set_last_inputted_money(0)
     else
-        # 何もしない
+        # TODO: 何もしないようにしないと。一番最初に戻るから、金額がリセットされてまう
         puts "選択した飲み物は購入できません。\n払い戻しします。"
 
         charge = deposit.calclate_charge(0)
