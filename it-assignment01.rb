@@ -60,6 +60,8 @@ isEnd = false
 # 自販機の初期化
 stocker = Stocker.new
 stocker.set_drink_lane("コーラ", 120, 5)
+stocker.set_drink_lane("レッドブル", 200, 5)
+stocker.set_drink_lane("水", 100, 5)
 
 until isEnd
     isAdmin = false
