@@ -12,6 +12,18 @@ class Deposit
         @total
     end
 
+    def set_last_inputted_money(_last_inputted_money)
+        @last_inputted_money = _last_inputted_money
+    end
+
+    def set_total(_total)
+        @total = _total
+    end
+
+    def calclate_charge(unit_price)
+        self.set_total(self.get_total - unit_price)
+    end
+
     def accept_money(_contents = 0)
         possible_money_type = MoneyChecker.get_possible_money_type()
 
@@ -38,7 +50,6 @@ class Deposit
     end
 
     def self.ask_finish(answer = '')
-        puts 'お金をまだ入れますか？ (はい/いいえ)'
         if answer == ''
             answer = gets.chomp!.to_s 
         end

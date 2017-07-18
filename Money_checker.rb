@@ -23,7 +23,7 @@ class MoneyChecker
             puts "受け付けることが出来ないお金が投入されました。"
             puts "釣り銭として排出します。"
 
-            puts input
+            puts input.to_s + '円'
 
             puts '以下の' + @@Possible_money_type.size.to_s + '種類の中から選択してください'
             @@Possible_money_type.each {|item| puts "- " + item.to_s + "円\n"}

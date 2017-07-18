@@ -1,7 +1,7 @@
 class Drink
-    def initialize(name, price, initial_stock)
-        @name = name
-        @price = price
+    def initialize(_name, _price, initial_stock)
+        @name = _name
+        @price = _price
         @stock = initial_stock
     end
 
@@ -9,5 +9,21 @@ class Drink
         puts @name
         puts @price
         puts @stock
+    end
+
+    def get_name
+        @name
+    end
+
+    def get_price
+        @price
+    end
+    
+    def get_stock
+        @stock
+    end
+
+    def set_stock(_stock)
+        @stock = _stock
     end
 end
