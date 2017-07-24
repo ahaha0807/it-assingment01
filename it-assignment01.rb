@@ -105,6 +105,6 @@ until isEnd
         deposit.return_charge(charge)
     end
 
-    puts '終了しますか？'
+    puts '終了しますか？（はい/いいえ）'
     isEnd = ask_finish()
 end
