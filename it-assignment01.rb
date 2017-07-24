@@ -21,7 +21,7 @@ end
 
 def ask_finish(answer = '')
     if answer == ''
-        answer = gets.chomp!.to_s 
+        answer = gets.chomp!.to_s
     end
 
     if answer == 'はい' || answer.downcase == 'yes' || answer.downcase == 'y'
@@ -57,6 +57,8 @@ end
 
 isEnd = false
 
+# 購入後にadminモードでついかできるようにした方が良い
+# 欲張りを言えばadminモードでの追加(現在はドリンクリストの取得だけ)
 # 自販機の初期化
 stocker = Stocker.new
 stocker.set_drink_lane("コーラ", 120, 5)
@@ -70,9 +72,9 @@ until isEnd
     deposit = Deposit.new()
     while isRepeat do
         isAdmin = deposit.accept_money()
-        
+
         if isAdmin
-            admin_mode() 
+            admin_mode()
             break
         end
 
@@ -87,14 +89,14 @@ until isEnd
 
     if item == 'return'
         puts '払い戻し操作が実行されました。'
-        
+
         charge = deposit.calclate_charge(0)
         deposit.return_charge(charge)
     elsif check_selected_item(item, deposit)
         stocker.buy_selected_item(item)
         charge = deposit.calclate_charge(item.get_price)
         puts 'お釣りは、' + charge.to_s + '円です。'
-        
+
         deposit.set_total(0)
         deposit.set_last_inputted_money(0)
     else
@@ -105,6 +107,7 @@ until isEnd
         deposit.return_charge(charge)
     end
 
+    #"お金をまだ入れますか？（はい/いいえ）"の部分のように(はい/いいえ)があったほうがよい
     puts '終了しますか？'
     isEnd = ask_finish()
 end

@@ -13,6 +13,8 @@ class Stocker
     def self.display_commodities
         puts '【商品リスト】'
         @@Lanes.each.with_index {|item, index|
+            #購入画面での番号表示はいらない気がする.購入場面で番号を押したのときに購入できなかったため
+            #（番号をつけるなら、番号で購入できるようにした方が良い）
             puts '- 番号: '+ index.to_s + ' 商品名 : ' + item.get_name.to_s + ' 価格 : ' + item.get_price.to_s
         }
     end
@@ -20,7 +22,7 @@ class Stocker
     def set_drink_lane(name, price, initial_stock)
         @@Lanes.push(Drink.new(name, price, initial_stock))
     end
-    
+
     def find(item_id)
         if item_id == 'return'
             return 'return'
